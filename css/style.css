@@ -1,5 +1,113 @@
+/* -------------------- 基礎設置 -------------------- */
+
+/* 重置瀏覽器預設樣式，確保一致性 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 確保 padding 和 border 不增加元素總寬度 */
+}
+
+body {
+    font-family: "WDXL Lubrifont SC", sans-serif;
+    line-height: 1.6;
+    letter-spacing: 0.3em;
+    background-color: #0f0c26; /* 深蓝色背景 */
+    color: #c6b8c4; /* 標準文字顏色 */
+}
+
+
+/* 設定段落文字大小 */
+main p {
+    font-size: 16px; 
+    margin-bottom: 15px; /* 段落間距 */
+}
+
+/* 設定主要標題大小 */
+main h1 {
+    font-size: 5rem; /* 大約是 40 像素 */
+    color: #cdd3da; 
+    text-align: center;
+}
+
+/* 設定次要標題大小 */
+main h2 {
+    font-size: 1.8rem; /* 大約是 28.8 像素 */
+    color: #007bff;
+    text-align: center;
+}
+
+/* -------------------- 導航欄 (Header/Nav) -------------------- */
+
+header {
+    background-color: #0d0454; /* 深灰色背景 */
+    color: #c6b8c4;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav a {
+    color: #c6b8c4;
+    text-decoration: none; /* 移除超連結下劃線 */
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+/* -------------------- 主要內容 (Main) -------------------- */
+
+main {
+    width: 80%; /* 設置內容區塊最大寬度為 80% */
+    text-align: center;
+    margin: 20px auto; /* 讓內容居中 */
+    letter-spacing: 1em;
+    font-weight: 200; /*  "WDXL Lubrifont SC" 只有400  */
+    padding: 2.5rem;
+    background-color: rgb(30, 30, 85);
+}
+
+
+/* -------------------- 頁腳 (Footer) -------------------- */
+
+footer {
+    background-color: #0f0c26;
+    color: #c6b8c4;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+
+/* 確保所有圖片響應式縮放 */
 img {
     max-width: 100%; 
     height: auto; 
     display: block; 
+    margin: 0; /* 讓圖片上下有間距，並在中間顯示 */
+}
+
+/* -------------------- 圖片網格佈局 (Flexbox) -------------------- */
+.image-grid {
+    display: flex;        /* 核心：啟用 Flexbox 佈局 */
+    flex-wrap: wrap;      /* 允許圖片換行 */
+    gap: 20px;            /* 設置圖片之間的間距為 20 像素 */
+    margin-top: 30px;
+    justify-content: center; /* 讓圖片在容器中居中顯示 */
+}
+
+.image-item {
+    /* 核心：定義每個圖片項目的彈性 */
+    /* 這行設置讓每張圖在單行中佔據約 30% 的寬度，達到每行 3 張圖的效果 */
+    flex: 1 1 calc(33.33% - 20px); 
+    
+    min-width: 500px; /* 設置圖片的最小寬度，防止手機上圖片太小 */
+    /*   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加陰影，突出圖片 */    
+    /*   border-radius: 8px; /* 圓角效果 */
+    overflow: hidden; /* 確保內容不溢出 */
+    text-align: center;
+}
+
+.image-item p {
+    padding: 10px;
+    /*  background-color: #f9f9f9;  */
+    font-size: 0.9rem;
+    color: #c6b8c4;
 }
