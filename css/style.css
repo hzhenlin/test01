@@ -24,10 +24,12 @@ main p {
 }  
 /* 設定主要標題大小 */
 main h1 {
-    font-size: clamp(2rem, 10vw, 5rem);
+    font-size: clamp(2rem, 6vw, 5rem);
     white-space: nowrap;
     color: #cdd3da; 
     text-align: center;
+    overflow: visible;   /* 允许文本正常显示 */
+    text-overflow: clip; /* 移除省略号 */
 }
 
 /* 設定次要標題大小 */
@@ -82,6 +84,50 @@ footer {
     padding: 10px 0;
     margin-top: 30px;
 }
+
+/***** ----------------- 首页选项设计 ----------------- *****/
+
+/* 0. 設定主菜單 LI 的位置 */
+header nav ul li {
+    display: inline-block;
+    margin: 2px 0 5px;
+    
+    /* 核心：設定相對定位，讓子選單可以絕對定位於此 */
+    position: relative; 
+    text-align: left;
+}
+
+/* 1. 預設隱藏子選單 */
+.submenu {
+    position: absolute; 
+    display: none; /* <-- 必須有這行，用於隱藏 */
+    /* ... 其他样式待设定 ... */
+}
+
+/* 2. 懸停顯示子選單 */
+.has-submenu:hover > .submenu {
+    display: block; /* <-- 必須有這行，用於顯示 */
+    color: #0e27a2
+}
+
+/* 4. 子選單連結的樣式 */
+.submenu li a {
+    /* ... 確保 color 屬性設定了您想要的顏色 ... */
+    color: #c6b8c4; /* <-- 最可能控制的地方，通常會與主連結相同 */
+    padding: 10px 15px;
+    font-size: clamp(0.5rem, 2vw, 2rem);
+    white-space: nowrap;
+    color: #cdd3da; 
+    overflow: visible;   /* 允许文本正常显示 */
+    text-overflow: clip; /* 移除省略号 */
+    /* ... */
+}
+
+/* 5. 子選單連結的滑鼠懸停效果 */
+.submenu li a:hover {
+    color: #0e27a2; /* <-- 這裡控制滑鼠懸停時的文字顏色 */
+}
+
 
 
 /* 確保所有圖片響應式縮放 */
