@@ -131,6 +131,46 @@ main nav ul li {
     /* ... 其他样式待设定 ... */
 }
 
+                  /*                1-2              */
+/* -------------------- 手機/小螢幕優化：強制顯示子選單 -------------------- */
+
+@media (max-width: 600px) { 
+    /* 可以根據需要調整這個寬度，例如 768px */
+
+    /* 1. 核心：覆蓋桌面版的 display: none; */
+    /* 在小螢幕上，不論是否懸停，子選單都應顯示出來 */
+    .submenu {
+        display: block !important; /* 強制顯示子選單 */
+        
+        /* 由於子選單在手機上已經顯示，我們需要調整定位 */
+        position: static; /* 取消絕對定位，讓它回到文檔流中，在父元素下方堆疊 */
+        width: 100%; /* 讓它佔滿整個寬度 */
+        margin: 5px 0 10px 0; /* 增加一點垂直間距 */
+        
+        /* 可選：讓背景和文字有區分，增加層次感 */
+        /* background-color: #1e1e3f; /* 稍微淺一點的背景色 */
+        /* border: none; /* 移除邊框 */
+    }
+
+    /* 2. 主選單 LI 的定位也需要取消 */
+    header nav ul li {
+        display: block; /* 讓主菜單垂直堆疊 */
+        position: static; /* 取消相對定位，避免定位錯誤 */
+    }
+    
+    /* 3. 可選：讓子選單項目向右縮進，增加層次感 */
+    .submenu li a {
+        padding-left: 2rem; /* 增加左側內邊距，看起來像是子項目 */
+    }
+    
+    /* 4. 移除 Hover 效果（因為已經預設展開） */
+    .has-submenu:hover > .submenu {
+        display: block; /* 保持顯示，但這條規則在手機上通常不再必要 */
+    }
+}
+
+
+
 /* 2. 懸停顯示子選單 */
 .has-submenu:hover > .submenu {
     display: block; /* <-- 必須有這行，用於顯示 */
@@ -158,7 +198,7 @@ main nav ul li {
     /* ... 確保 color 屬性設定了您想要的顏色 ... */
     color: #c6b8c4; /* <-- 最可能控制的地方，通常會與主連結相同 */
 
-    padding: 0.2em 0.9em;
+    padding: 0 0.9em;
     /* 可選：設置一個更小的行高，例如 1.2 或 1 */
     line-height: 0.1;
 
