@@ -327,20 +327,13 @@ img {
         overflow: hidden;
 
         margin: 0;
-        min-width: 0;
+        min-width: 100%;
     }
 
     .oc-image-display img {
         max-width: 100%;
         height: auto;
-        /* 增加一個最小高度（例如 300px），讓圖片在視覺上足夠大 */
-        /* 即使視窗很小，圖片也會保持這個最小高度（並相應縮放寬度） */
-        min-width: 100%; 
-        text-align: center; /* 讓圖片居中 */
-        
-        /* 確保圖片填滿，並可能裁切掉多餘部分，以維持視覺效果 */
-        object-fit: contain; /* 使用 contain 確保圖片完整顯示，但可能有空白 */
-        /* 或使用 cover，圖片可能會被裁切，但不會有空白 */
+        display: block;
         
     }
 
