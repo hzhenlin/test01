@@ -10,6 +10,7 @@
 body {
     font-family: "WDXL Lubrifont SC", sans-serif;
     line-height: 1.6;
+    font-size: clamp(0.5rem, 2vw, 1rem);
     letter-spacing: 0.3em;
     background-color: #0f0c26; /* 深蓝色背景 */
     color: #c6b8c4; /* 標準文字顏色 */
@@ -20,20 +21,27 @@ body {
 main p {
     font-size: 16px; 
     margin-bottom: 15px; /* 段落間距 */
-}
-
+}  
 /* 設定主要標題大小 */
 main h1 {
-    font-size: 5rem; /* 大約是 40 像素 */
+    font-size: clamp(2rem, 10vw, 5rem);
+    white-space: nowrap;
     color: #cdd3da; 
     text-align: center;
 }
 
 /* 設定次要標題大小 */
 main h2 {
-    font-size: 1.8rem; /* 大約是 28.8 像素 */
-    color: #007bff;
-    text-align: center;
+    white-space: nowrap;
+}
+
+/* 2. 媒体查询：当屏幕足够小（例如宽度小于 600px）时，允许换行 */
+@media (max-width: 400px) {
+    main h2 {
+        white-space: normal; /* **允许换行** */
+        overflow: visible;   /* 允许文本正常显示 */
+        text-overflow: clip; /* 移除省略号 */
+    }
 }
 
 /* -------------------- 導航欄 (Header/Nav) -------------------- */
