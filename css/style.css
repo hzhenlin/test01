@@ -121,7 +121,7 @@ main nav ul li {
     /* ... 確保 color 屬性設定了您想要的顏色 ... */
     color: #c6b8c4; /* <-- 最可能控制的地方，通常會與主連結相同 */
     
-    padding: 10px 15px;
+    padding: 15px 20px;
     font-size: clamp(3rem, 4vw, 4rem);
     white-space: nowrap;
     overflow: visible;   /* 允许文本正常显示 */
