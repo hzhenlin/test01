@@ -161,6 +161,9 @@ main nav ul li {
     /* 3. 可選：讓子選單項目向右縮進，增加層次感 */
     .submenu li a {
         padding-left: 2rem; /* 增加左側內邊距，看起來像是子項目 */
+        color: #576495 !important;
+        font-size: 1.2rem !important;
+        line-height: 0.1rem !important; /* 保持緊湊行高 */
     }
     
     /* 4. 移除 Hover 效果（因為已經預設展開） */
@@ -196,13 +199,13 @@ main nav ul li {
 .submenu li a {
     display:block;
     /* ... 確保 color 屬性設定了您想要的顏色 ... */
-    color: #c6b8c4; /* <-- 最可能控制的地方，通常會與主連結相同 */
+    color: #576495; /* <-- 最可能控制的地方，通常會與主連結相同 */
 
     padding: 0 0.9em;
     /* 可選：設置一個更小的行高，例如 1.2 或 1 */
-    line-height: 0.1;
+    line-height: 0.1rem;
 
-    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-size: clamp(1.2rem, 1.2vw, 2rem);
     white-space: nowrap;
     overflow: visible;   /* 允许文本正常显示 */
     text-overflow: clip; /* 移除省略号 */
