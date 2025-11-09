@@ -69,7 +69,6 @@ main {
     letter-spacing: 1em;
     font-weight: 200; /*  "WDXL Lubrifont SC" 只有400  */
     padding: 1rem;
-    background-color: rgb(108, 97, 103);
     border-radius: 2rem; /* 圓角 */
 }
 
