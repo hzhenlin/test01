@@ -102,6 +102,26 @@ main {
 }
 
 
+/* 專門針對有這個 Class 的 main 元素 */
+main.centered-single-line {
+    /* 1. 水平居中 */
+    text-align: center; 
+
+    /* 2. 垂直居中 */
+
+    /* 讓行高等於高度，實現垂直居中 */
+    line-height: 55vw; 
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    white-space: nowrap;
+    color: #cdd3da; 
+    overflow: visible;   /* 允许文本正常显示 */
+    text-overflow: clip; /* 移除省略号 */
+
+}
+
+
+   
+
 /* -------------------- 頁腳 (Footer) -------------------- */
 
 footer {
@@ -228,27 +248,45 @@ img {
     height: auto; 
     display: block; 
     margin: 0; /* 讓圖片上下有間距，並在中間顯示 */
+    border: 0; /* 【新增】確保圖片超連結不會出現邊框 */
 }
 
 /* -------------------- 圖片網格佈局 (Flexbox) -------------------- */
-.image-grid {
+
+/* 通用圖片畫廊容器的基礎設定：Flexbox 和自動換行 */
+.image-gallery {
     display: flex;        /* 核心：啟用 Flexbox 佈局 */
     flex-wrap: wrap;      /* 允許圖片換行 */
-    gap: 20px;            /* 設置圖片之間的間距為 20 像素 */
+    gap: 20px;            /* 設置圖片之間的間距為 20 像素 (現代 Flexbox 推薦) */
     margin-top: 30px;
     justify-content: center; /* 讓圖片在容器中居中顯示 */
+    /* 移除原有的 .image-grid 樣式  */
+}
+
+
+/* 1. 舊有頁面：【最多 3 個一排】的佈局樣式 */
+.gallery-cols-3 .image-item {
+    /* 100% / 3 = 33.333% */
+    /* Flex 屬性：grow, shrink, basis。這裡 basis 是核心寬度 */
+    flex: 0 0 calc(33.33% - 20px); 
+    /* 移除 min-width: 100%;，避免在手機上變成單欄時無效 */
+}
+
+
+/* 2. 新頁面：【最多 6 個一排】的佈局樣式 */
+.gallery-cols-6 .image-item {
+    /* 100% / 6 = 16.666% */
+    flex: 0 0 calc(16.66% - 20px); 
 }
 
 .image-item {
-    /* 核心：定義每個圖片項目的彈性 */
-    /* 這行設置讓每張圖在單行中佔據約 30% 的寬度，達到每行 3 張圖的效果 */
-    flex: 1 1 calc(33.33% - 20px); 
-    
-    min-width: 100%; /* 設置圖片的最小寬度，防止手機上圖片太小 */
+
+    min-width: 25rem; /* 設置圖片的最小寬度，防止手機上圖片太小 */
     /*   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加陰影，突出圖片 */    
     /*   border-radius: 8px; /* 圓角效果 */
     overflow: hidden; /* 確保內容不溢出 */
     text-align: center;
+    box-sizing: border-box; /* 確保 padding/border 不會增加尺寸 */
 }
 
 .image-item p {
@@ -256,6 +294,26 @@ img {
     /*  background-color: #f9f9f9;  */
     font-size: 0.9rem;
     color: #c6b8c4;
+}
+
+.image-item img {
+/* 確保圖片填滿父容器 .image-item 的寬度 */
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+}
+
+/* 媒體查詢：當螢幕寬度小於 768px 時切換為手機佈局 */
+@media (max-width: 900px) {
+    /* ... 其他手機優化樣式 ... */
+    
+    /* 讓所有圖片網格在手機上都變成單欄佈局 */
+    .gallery-cols-3 .image-item,
+    .gallery-cols-6 .image-item {
+        /* 手機上強制佔滿一行 */
+        flex: 0 0 100%; 
+    }
 }
 
 /* -------------------- OC 介紹頁面排版 -------------------- */
