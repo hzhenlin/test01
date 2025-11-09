@@ -34,7 +34,12 @@ main h1 {
 
 /* 設定次要標題大小 */
 main h2 {
+    font-size: clamp(1rem, 2vw, 4rem);
     white-space: nowrap;
+    color: #cdd3da; 
+    text-align: center;
+    overflow: visible;   /* 允许文本正常显示 */
+    text-overflow: clip; /* 移除省略号 */
 }
 
 /* 2. 媒体查询：当屏幕足够小（例如宽度小于 600px）时，允许换行 */
@@ -88,7 +93,7 @@ footer {
 /***** ----------------- 首页选项设计 ----------------- *****/
 
 /* 0. 設定主菜單 LI 的位置 */
-header nav ul li {
+main nav ul li {
     display: inline-block;
     margin: 2px 0 5px;
     
@@ -110,17 +115,39 @@ header nav ul li {
     color: #0e27a2
 }
 
-/* 4. 子選單連結的樣式 */
-.submenu li a {
+/* 3. 子選單 LI 的樣式 */
+.submenu li {
+    display: block;
     /* ... 確保 color 屬性設定了您想要的顏色 ... */
     color: #c6b8c4; /* <-- 最可能控制的地方，通常會與主連結相同 */
+    
     padding: 10px 15px;
-    font-size: clamp(0.5rem, 2vw, 2rem);
+    font-size: clamp(3rem, 4vw, 4rem);
     white-space: nowrap;
-    color: #cdd3da; 
     overflow: visible;   /* 允许文本正常显示 */
     text-overflow: clip; /* 移除省略号 */
     /* ... */
+    margin: 0;
+}
+
+/* 4. 子選單連結的樣式 */
+.submenu li a {
+    display:block;
+    /* ... 確保 color 屬性設定了您想要的顏色 ... */
+    color: #c6b8c4; /* <-- 最可能控制的地方，通常會與主連結相同 */
+
+    padding: 0.2em 0.9em;
+    /* 可選：設置一個更小的行高，例如 1.2 或 1 */
+    line-height: 0.3;
+
+    font-size: clamp(0.5rem, 1.5vw, 2rem);
+    white-space: nowrap;
+    overflow: visible;   /* 允许文本正常显示 */
+    text-overflow: clip; /* 移除省略号 */
+    /* ... */
+    border-radius: 0;
+    font-weight: normal;
+    margin: 0;
 }
 
 /* 5. 子選單連結的滑鼠懸停效果 */
