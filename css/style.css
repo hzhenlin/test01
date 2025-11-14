@@ -283,11 +283,6 @@ main nav ul li {
 }
 
 
-.has-submenu:hover {
-    color: #0e27a2;
-    transform: scale(1.25);
-}
-
                   /*                1-2              */
 /* -------------------- 手機/小螢幕優化：強制顯示子選單 -------------------- */
 
@@ -336,8 +331,16 @@ main nav ul li {
     display: block !important; /* <-- 必須有這行，用於顯示 */  /* 保持顯示，因為 max-height: 0 時 display: none 會阻止動畫 */
     max-height: 300px;  /* 設置一個足夠大的值，讓內容完全展開 */
     opacity: 1;   /* 完全顯示 */
-    color: #0e27a2
-    
+}
+
+.has-submenu:hover {
+    transform: scale(1.17);
+     /* 平滑過渡效果 */
+    transition: all 0.3s ease-in-out;
+}
+
+.has-submenu a:hover{
+    color: #0e27a2 ;
 }
 
 /* 3. 子選單 LI 的樣式 */
