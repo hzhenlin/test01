@@ -82,7 +82,7 @@ body {
 
 /* 設定段落文字大小 */
 main p {
-    font-size: 16px; 
+    font-size: 1.2vw; 
     margin-bottom: 10px; /* 段落間距 */
 }  
 /* 設定主要標題大小 */
