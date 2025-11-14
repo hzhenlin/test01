@@ -667,8 +667,17 @@ img {
 /* 3. 手機響應式優化 */
 @media (max-width: 768px) {
     .gallery-height-aligned .image-item img {
-        /* 在手機上可以降低高度，例如 150px */
-        height: 300px; 
+        max-width: 640px; /* 給圖片一個固定的最大寬度 */
+        flex: 0 0 100%; 
+        
+        height: auto;
+        width: 100%;
+        object-fit: contain;
+
+        overflow: hidden;
+
+        margin: 0;
+        min-width: 100%;
     }
 }
 
