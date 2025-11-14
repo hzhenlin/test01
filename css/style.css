@@ -18,7 +18,10 @@ body {
     overflow-x: hidden;
 }
 
-/* -------------------- Part 1: 網頁載入動畫 (大選項淡入) -------------------- */
+
+
+
+
 
 /* 定義淡入動畫 */
 
@@ -71,14 +74,8 @@ body {
 }
 
 
-.animation-nav-item {
-    opacity: 0; /* 預設隱藏 */
-    transform: translateX(20px); /* 預設在右方 */
-    animation: fadeInSlideLeft 0.6s ease-out forwards; /* 應用動畫 */
-    
-    /* 使用 CSS 變數計算延遲，讓項目依序出現 */
-    animation-delay: calc(var(--animation-order) * 0.2s); 
-}
+
+
 
 
 
@@ -129,7 +126,7 @@ main h3 {
 }
 
 /* 設定特殊標題大小 */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     main h3 {
         white-space: normal;
         text-align: center;
@@ -139,7 +136,9 @@ main h3 {
 }
 
 
-/* -------------------- 導航欄 (Header/Nav) -------------------- */
+
+
+/* -------------------- 通用導航欄 (Header/Nav) -------------------- */
 
 header {
     position: relative;  /* 確保 header 是相對定位，這樣 home-button-top-left 才能絕對定位於 header 內 */
@@ -161,6 +160,11 @@ header nav ul li {
     /* 核心：添加過渡效果 */
     transition: all 0.3s ease-in-out, transform 0.2s ease-out; /* 專為放大添加獨立過渡 */
 }
+
+
+
+
+
 
 
 
@@ -191,7 +195,7 @@ header nav ul li {
 }
 
 /* -------------------- 手機/小螢幕優化 -------------------- */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .home-button-top-left {
         top: 10px;
         left: 10px;
@@ -257,6 +261,13 @@ footer {
     text-decoration: none;
 }
 
+.subpage-links ul li:hover{
+    transform: scale(1.15);
+}
+.subpage-links ul li a:hover{
+    color:#0e27a2;
+}
+
 /***** ----------------- 首页选项设计 ----------------- *****/
 
 /* 0. 設定主菜單 LI 的位置 */
@@ -283,46 +294,8 @@ main nav ul li {
 }
 
 
-                  /*                1-2              */
-/* -------------------- 手機/小螢幕優化：強制顯示子選單 -------------------- */
 
-@media (max-width: 600px) { 
-    /* 可以根據需要調整這個寬度，例如 768px */
 
-    /* 1. 核心：覆蓋桌面版的 display: none; */
-    /* 在小螢幕上，不論是否懸停，子選單都應顯示出來 */
-    .submenu {
-        display: block !important; /* 強制顯示子選單 */
-        
-        /* 由於子選單在手機上已經顯示，我們需要調整定位 */
-        position: static; /* 取消絕對定位，讓它回到文檔流中，在父元素下方堆疊 */
-        width: 100%; /* 讓它佔滿整個寬度 */
-        margin: 5px 0 10px 0; /* 增加一點垂直間距 */
-        
-        /* 可選：讓背景和文字有區分，增加層次感 */
-        /* background-color: #1e1e3f; /* 稍微淺一點的背景色 */
-        /* border: none; /* 移除邊框 */
-    }
-
-    /* 2. 主選單 LI 的定位也需要取消 */
-    header nav ul li {
-        display: block; /* 讓主菜單垂直堆疊 */
-        position: static; /* 取消相對定位，避免定位錯誤 */
-    }
-    
-    /* 3. 可選：讓子選單項目向右縮進，增加層次感 */
-    .submenu li a {
-        padding-left: 2rem; /* 增加左側內邊距，看起來像是子項目 */
-        color: #576495 !important;
-        font-size: 1.2rem !important;
-        line-height: 0.1rem !important; /* 保持緊湊行高 */
-    }
-    
-    /* 4. 移除 Hover 效果（因為已經預設展開） */
-    .has-submenu:hover > .submenu {
-        display: block; /* 保持顯示，但這條規則在手機上通常不再必要 */
-    }
-}
 
 
 
@@ -385,24 +358,26 @@ main nav ul li {
 }
 
 
+
+
+
 /* -------------------- 導航欄 (Header/Nav) 樣式 - 覆蓋 -------------------- */
 
-/* 原有的橫向排列規則（適用於所有頁面，包括首頁）
-header nav ul li {
-    display: inline-block;
-    position: relative; 
-    margin: 0 10px; 
-}
-*/
+
 
 /* 核心修正：只在首頁 (body.home-page) 啟用垂直堆疊 */
 .home-page header nav ul li {
-    display: block; /* 讓列表項目垂直堆疊 */
-    margin: 0 auto 5px auto; /* 居中並增加項目間的垂直間距 */
-    text-align: center; /* 讓按鈕內容居中 */
-
+    display: block ; /* 首頁：強制垂直堆疊 */
+    margin: 0 auto 5px auto; /* 居中並增加垂直間距 */
+    text-align: center; /* 讓內容居中 */
     position: relative;
 }
+
+.home-page header nav ul li a {
+    /* 核心：添加過渡效果 */
+    transition: all 0.3s ease-in-out, transform 0.2s ease-out; /* 專為放大添加獨立過渡 */
+}
+
 
 /* 確保橫向動畫容器在垂直排列時有正確的寬度 */
 .home-page header nav ul {
@@ -427,6 +402,30 @@ header nav ul li {
 
 }
 
+.home-page main nav ul li {
+    opacity: 0 ;
+    transform: translateX(20px); /* 預設在右方 */
+    animation: fadeInSlideLeft 0.6s ease-out forwards; /* 應用動畫 */
+    
+    text-align: left; /* 讓 main 裡面的所有文本都靠左對齊 */
+    width: 80%; /* 確保有寬度 */
+    margin: 10px auto;
+
+    /* 使用 CSS 變數計算延遲，讓項目依序出現 */
+    animation-delay: calc(var(--animation-order) * 0.2s); 
+}
+
+.home-page main nav ul li .submenu {
+    opacity: 0 ;
+    transform: translateX(20px); /* 預設在右方 */
+    animation: fadeInSlideLeft 0.1s ease-out forwards; /* 應用動畫 */
+
+    /* 使用 CSS 變數計算延遲，讓項目依序出現 */
+    animation-delay: calc(var(--animation-order) * 0.2s); 
+}
+
+
+
 /* 關鍵點：子選單的滑入動畫必須生效 */
 .home-page .animation-nav-item:hover > .submenu {
 
@@ -438,6 +437,59 @@ header nav ul li {
 }
 
 
+
+
+
+
+                  /*                1-2              */
+/* -------------------- 手機/小螢幕優化：強制顯示子選單 -------------------- */
+
+@media (max-width: 768px) { 
+    /* 可以根據需要調整這個寬度，例如 768px */
+
+    /* 1. 核心：覆蓋桌面版的 display: none; */
+    /* 在小螢幕上，不論是否懸停，子選單都應顯示出來 */
+    .submenu {
+        display: block !important; /* 強制顯示子選單 */
+        
+        /* 由於子選單在手機上已經顯示，我們需要調整定位 */
+        position: static; /* 取消絕對定位，讓它回到文檔流中，在父元素下方堆疊 */
+        width: 100%; /* 讓它佔滿整個寬度 */
+        margin: 5px 0 10px 0; /* 增加一點垂直間距 */
+        
+        /* 可選：讓背景和文字有區分，增加層次感 */
+        /* background-color: #1e1e3f; /* 稍微淺一點的背景色 */
+        /* border: none; /* 移除邊框 */
+
+        /* 關鍵修正點：覆蓋桌面版的動畫約束 */
+        max-height: none !important; /* 讓子選單高度完全展開，取消 0px 限制 */
+        opacity: 1 !important; /* 確保內容完全可見 */
+        transition: none !important; /* 移除過渡效果，立即顯示 */
+    }
+
+    /* 2. 主選單 LI 的定位也需要取消 */
+    header nav ul li {
+        display: block !important; /* 讓主菜單垂直堆疊 */
+        position: static !important; /* 取消相對定位，避免定位錯誤 */
+    }
+    
+    /* 3. 可選：讓子選單項目向右縮進，增加層次感 */
+    .submenu li a {
+        padding-left: 2rem; /* 增加左側內邊距，看起來像是子項目 */
+        color: #576495 !important;
+        font-size: 1.2rem !important;
+        line-height: 0.1rem !important; /* 保持緊湊行高 */
+    }
+    
+    /* 4. 移除 Hover 效果（因為已經預設展開） */
+    .has-submenu:hover > .submenu, .home-page .animation-nav-item:hover > .submenu {
+        /*  display: block !important; /* 保持顯示，但這條規則在手機上通常不再必要 */
+        max-height: none !important;
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+}
 
 
 
