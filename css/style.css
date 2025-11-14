@@ -45,7 +45,7 @@ body {
     }
     to {
         opacity: 1;
-        transform: translateX(-20px);
+        transform: translateX(0px);
     }
 }
 
@@ -57,7 +57,7 @@ body {
     }
     to {
         opacity: 1;
-        transform: translateX(-20px);
+        transform: translateX(0px);
     }
 }
 
@@ -97,7 +97,7 @@ main h1 {
 
 /* 設定次要標題大小 */
 main h2 {
-    font-size: clamp(1rem, 1.6vw, 4rem);
+    font-size: clamp(1.2rem, 2vw, 4rem);
     white-space: nowrap;
     color: #cdd3da; 
     text-align: center;
@@ -106,7 +106,7 @@ main h2 {
 }
 
 /* 2. 媒体查询：当屏幕足够小（例如宽度小于 600px）时，允许换行 */
-@media (max-width: 400px) {
+@media (max-width: 768px) {
     main h2 {
         white-space: normal; /* **允许换行** */
         text-align: center;
@@ -199,7 +199,7 @@ header nav ul li {
     .home-button-top-left {
         top: 10px;
         left: 10px;
-        font-size: 0.8rem; /* 在手機上再縮小一點 */
+        font-size: 1.2rem; /* 在手機上再縮小一點 */
     }
 }
 
@@ -257,7 +257,7 @@ footer {
 }
 
 footer ul {
-    font-size: clamp(0.5rem, 1.4vw, 2rem);
+    font-size: clamp(1rem, 1.4vw, 2rem);
     white-space: nowrap;
     color: #cdd3da; 
     text-align: center;
@@ -278,6 +278,7 @@ footer ul {
 .subpage-links ul li a:hover{
     color:#0e27a2;
 }
+
 
 /***** ----------------- 首页选项设计 ----------------- *****/
 
@@ -386,8 +387,8 @@ main nav ul li {
 /* 核心修正：只在首頁 (body.home-page) 啟用垂直堆疊 */
 .home-page header nav ul li {
     display: block ; /* 首頁：強制垂直堆疊 */
-    margin: 0 auto 5px auto; /* 居中並增加垂直間距 */
-    text-align: center; /* 讓內容居中 */
+    margin: 0 0 5px 0; /* 居中並增加垂直間距 */
+    text-align: left; /* 讓內容居中 */
     position: relative;
 
 }
@@ -430,11 +431,15 @@ main nav ul li {
 }
 
 .home-page main nav ul li {
+
+    transform-origin: left center;
+
     opacity: 0 ;
     transform: translateX(20px); /* 預設在右方 */
     animation: fadeInSlideLeft 0.6s ease-out forwards; /* 應用動畫 */
     
-    text-align: left; /* 讓 main 裡面的所有文本都靠左對齊 */
+    /* text-align: left; /* 讓 main 裡面的所有文本都靠左對齊 */
+
     width: 80%; /* 確保有寬度 */
     margin: 10px auto;
 
@@ -445,6 +450,7 @@ main nav ul li {
 
 
 .home-page main nav ul li .submenu {
+    
     opacity: 0 ;
     transform: translateX(20px); /* 預設在右方 */
     animation: fadeInSlideLeft 0.1s ease-out forwards; /* 應用動畫 */
@@ -453,8 +459,32 @@ main nav ul li {
     animation-delay: calc(var(--animation-order) * 0.2s); 
 }
 
+.home-page main nav ul li .submenu li {
+    /* 1. 移除 LI 上可能繼承到的巨大 font-size，確保 LI 的高度正常 */
+    font-size: 1rem !important; 
+    
+    /* 2. 移除 LI 上多餘的內邊距，消除垂直方向上的巨大間距 */
+    padding: 0 10px 0 !important; 
+    
+    /* 3. 確保 LI 之間的垂直外邊距是可控的 */
+    margin: 0 !important;
+    
+    /* 5. 確保裡面的文字可以居中 (如果您想要子選項文字居中對齊) */
+    text-align: left;
+}
+
+.home-page main nav ul li .submenu li a {
+    line-height: 1.6 !important; /* 設定為標準行高 */
+}
+
+.home-page main nav ul li a {
+    display: inline-block !important;
+    transition: transform 0.3s ease-in-out !important;
+}
+
+
 .home-page main nav ul li a:hover {
-    /* transform: scale(1.05); */
+    transform: scale(1.05) !important;
     color:#0e27a2;
 }
 
@@ -468,6 +498,7 @@ main nav ul li {
     opacity: 1 !important; /* 強制淡入 */
     color: #0e27a2 !important;
 }
+
 
 
 
@@ -522,8 +553,23 @@ main nav ul li {
         transition: none !important;
     }
 
+    .has-submenu:hover {
+    transform: scale(1.05);
+     /* 平滑過渡效果 */
+    transition: all 0.3s ease-in-out;
 }
 
+}
+
+
+@media (max-width: 1000px) {
+    .oc_main-page main h2 {
+        white-space: normal; /* **允许换行** */
+        text-align: center;
+        overflow: visible;   /* 允许文本正常显示 */
+        text-overflow: clip; /* 移除省略号 */
+    }
+}
 
 
 
