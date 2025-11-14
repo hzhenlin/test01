@@ -12,9 +12,75 @@ body {
     line-height: 1.6;
     font-size: clamp(0.5rem, 2vw, 1rem);
     letter-spacing: 0.3em;
-    background-color: #0f0c26; /* 深蓝色背景 */
+    background-color: #000000; /* 深蓝色背景 */
     color: #c6b8c4; /* 標準文字顏色 */
+
+    overflow-x: hidden;
 }
+
+/* -------------------- Part 1: 網頁載入動畫 (大選項淡入) -------------------- */
+
+/* 定義淡入動畫 */
+
+/* 1、上滑 */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px); /* 從下方稍微上滑 */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2、左滑 */
+@keyframes fadeInSlideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 3、右滑 */
+@keyframes fadeInSlideRight {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 4、下滑 */
+@keyframes fadeInSlideRight {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.animation-nav-item {
+    opacity: 0; /* 預設隱藏 */
+    transform: translateX(20px); /* 預設在右方 */
+    animation: fadeInSlideLeft 0.6s ease-out forwards; /* 應用動畫 */
+    
+    /* 使用 CSS 變數計算延遲，讓項目依序出現 */
+    animation-delay: calc(var(--animation-order) * 0.2s); 
+}
+
+
 
 
 /* 設定段落文字大小 */
@@ -76,11 +142,64 @@ main h3 {
 /* -------------------- 導航欄 (Header/Nav) -------------------- */
 
 header {
-    background-color: #0d0454; /* 深灰色背景 */
+    position: relative;  /* 確保 header 是相對定位，這樣 home-button-top-left 才能絕對定位於 header 內 */
+    background-color: #000000; /* 深灰色背景 */
     color: #c6b8c4;
     padding: 1rem 0;
     text-align: center;
 }
+
+header nav ul li {
+
+    display: block; /* 讓主菜單垂直堆疊 */
+    position: relative;  /* 確保 header 是相對定位，這樣 home-button-top-left 才能絕對定位於 header 內 */
+    background-color: #000000; /* 深灰色背景 */
+    color: #c6b8c4;
+    padding: 1rem 0;
+    text-align: center;
+
+    /* 核心：添加過渡效果 */
+    transition: all 0.3s ease-in-out, transform 0.2s ease-out; /* 專為放大添加獨立過渡 */
+}
+
+
+
+
+/* -------------------- 首頁按鈕 (左上角) -------------------- */
+.home-button-top-left {
+    position: absolute; /* 絕對定位於 header 內 */
+    top: 15px; /* 距離頂部邊緣 15px */
+    left: 20px; /* 距離左側邊緣 20px */
+    z-index: 50; /* 確保它總是在最上層 */
+    
+    /* 字體樣式 */
+    font-size: 0.9rem; /* 比主選項（通常是 1rem）稍微小一點 */
+    color: #c6b8c4; /* 繼承您導航欄的文字顏色 */
+    text-decoration: none; /* 移除下劃線 */
+    padding: 5px 8px; /* 增加點擊區域 */
+    border-radius: 4px; 
+    
+    /* 平滑過渡效果 */
+    transition: all 0.3s ease-in-out; 
+}
+
+/* 懸停效果 */
+.home-button-top-left:hover {
+    color: #0e27a2; /* 懸停時 */
+    /* background-color: rgba(255, 255, 255, 0.1); /* 輕微的背景顏色 */
+    transform: scale(1.35); /* 輕微放大 */
+}
+
+/* -------------------- 手機/小螢幕優化 -------------------- */
+@media (max-width: 600px) {
+    .home-button-top-left {
+        top: 10px;
+        left: 10px;
+        font-size: 0.8rem; /* 在手機上再縮小一點 */
+    }
+}
+
+
 
 nav a {
     color: #c6b8c4;
@@ -100,6 +219,7 @@ main {
     padding: 0.5rem;
     border-radius: 2rem; /* 圓角 */
 }
+
 
 
 /* 專門針對有這個 Class 的 main 元素 */
@@ -125,11 +245,16 @@ main.centered-single-line {
 /* -------------------- 頁腳 (Footer) -------------------- */
 
 footer {
-    background-color: #0f0c26;
+    /* background-color: #0f0c26; */
     color: #c6b8c4;
     text-align: center;
     padding: 10px 0;
     margin-top: 30px;
+}
+
+.subpage-links ul li a{
+    color: #3f75b2;
+    text-decoration: none;
 }
 
 /***** ----------------- 首页选项设计 ----------------- *****/
@@ -144,11 +269,23 @@ main nav ul li {
     text-align: left;
 }
 
-/* 1. 預設隱藏子選單 */
+/* 1. 預設隱藏子選單 */    /* 子選單向下畫滑出 (高度和透明度) */
 .submenu {
     position: absolute; 
     display: none; /* <-- 必須有這行，用於隱藏 */
-    /* ... 其他样式待设定 ... */
+    
+    overflow: hidden; /* 確保內容不會在高度過渡時溢出 */
+    max-height: 0; /* 預設高度為 0，用於滑出動畫 */
+    opacity: 0; /* 預設透明，用於淡入 */
+    
+    /* 添加過渡效果，讓高度和透明度平滑變化 */
+    transition: max-height 0.4s ease-out, opacity 0.3s ease-in;
+}
+
+
+.has-submenu:hover {
+    color: #0e27a2;
+    transform: scale(1.25);
 }
 
                   /*                1-2              */
@@ -196,8 +333,11 @@ main nav ul li {
 
 /* 2. 懸停顯示子選單 */
 .has-submenu:hover > .submenu {
-    display: block; /* <-- 必須有這行，用於顯示 */
+    display: block !important; /* <-- 必須有這行，用於顯示 */  /* 保持顯示，因為 max-height: 0 時 display: none 會阻止動畫 */
+    max-height: 300px;  /* 設置一個足夠大的值，讓內容完全展開 */
+    opacity: 1;   /* 完全顯示 */
     color: #0e27a2
+    
 }
 
 /* 3. 子選單 LI 的樣式 */
@@ -238,7 +378,74 @@ main nav ul li {
 /* 5. 子選單連結的滑鼠懸停效果 */
 .submenu li a:hover {
     color: #0e27a2; /* <-- 這裡控制滑鼠懸停時的文字顏色 */
+    transform: scale(1.05); /* 放大 5% */
 }
+
+
+/* -------------------- 導航欄 (Header/Nav) 樣式 - 覆蓋 -------------------- */
+
+/* 原有的橫向排列規則（適用於所有頁面，包括首頁）
+header nav ul li {
+    display: inline-block;
+    position: relative; 
+    margin: 0 10px; 
+}
+*/
+
+/* 核心修正：只在首頁 (body.home-page) 啟用垂直堆疊 */
+.home-page header nav ul li {
+    display: block; /* 讓列表項目垂直堆疊 */
+    margin: 0 auto 5px auto; /* 居中並增加項目間的垂直間距 */
+    text-align: center; /* 讓按鈕內容居中 */
+
+    position: relative;
+}
+
+/* 確保橫向動畫容器在垂直排列時有正確的寬度 */
+.home-page header nav ul {
+    /* 確保列表容器有足夠寬度來容納居中的按鈕 */
+    max-width: 300px; 
+    margin: 0 auto; /* 讓整個 ul 列表在中間 */
+}
+
+/* 確保子選單在垂直排列時正確定位 */
+.home-page header nav ul li .submenu {
+
+    /* 1. 關鍵：取消絕對定位 */
+    /* 讓子選單回到正常的文檔流中，這樣它才能推開後續的 li 項目 */
+    position: static; /* 取消 absolute 定位 */
+  
+    left: none; 
+    transform: none; 
+    top: none; 
+
+    width: 100%; /* 讓子選單寬度與父項目一致 */
+    margin: 5px 0 10px 0; /* 在父項目和內容間增加一些間距 */
+
+}
+
+/* 關鍵點：子選單的滑入動畫必須生效 */
+.home-page .animation-nav-item:hover > .submenu {
+
+    display: block !important; /* <-- 必須有這行，用於顯示 */  /* 保持顯示，因為 max-height: 0 時 display: none 會阻止動畫 */
+    /* 確保這條規則權重足夠，能夠覆蓋 max-height: 0; */
+    max-height: 300px !important; /* 強制覆蓋，確保滑出 */
+    opacity: 1 !important; /* 強制淡入 */
+    color: #0e27a2 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

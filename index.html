@@ -11,16 +11,17 @@
 
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body class="home-page">
 
         <header>
-            <div class="current-page-title">-首頁-<br></div> 
+            <div class="current-page-title">-首頁-<br></div>
+            <a href="index.html" class="home-button-top-left">首頁</a> 
 
             <main><h3>
 
                 <nav class="main-nav">
                     <ul>
-                        <li class="has-submenu">
+                        <li class="animation-nav-item" style="--animation-order: 1">
                             <a href="oc_main.html">OC世界</a>
                                 <ul class="submenu">
                                     <li><a href="oc_worldview.html">世界觀</a></li>
@@ -29,9 +30,11 @@
                                 </ul>
                         </li>
 
-                        <li><a href="commission.html">稿件展示</a></li>
+                        <li calss="animation-nav-item" style="--animation-order: 2">
+                            <a href="commission.html">稿件展示</a>
+                        </li>
 
-                        <li class="has-submenu">
+                        <li class="animation-nav-item" style="--animation-order: 3">
                             <a href="tren_main.html">同人</a>
                                 <ul class="submenu">
                                     <li><a href="tren_bdx.html">布袋戲</a></li>
