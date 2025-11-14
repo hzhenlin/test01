@@ -73,6 +73,15 @@ body {
     }
 }
 
+/* 新增通用滑入類別 */
+.slide-in-right-to-left {
+    opacity: 0;
+    transform: translateX(30px); /* 初始位置在右側 */
+    animation: fadeInSlideLeft 0.6s ease-out forwards; /* 應用動畫 */
+    
+    /* 確保元素在動畫期間不影響佈局，並允許自定義延遲 */
+    animation-delay: calc(var(--animation-order, 0) * 0.15s); 
+}
 
 
 
@@ -115,8 +124,9 @@ main h2 {
     }
 }
 
+
 /* 設定特殊標題大小 */
-main h3 {
+main h3, h3 {
     font-size: clamp(2rem, 2vw, 3rem);
     white-space: nowrap;
     color: #cdd3da; 
@@ -127,7 +137,7 @@ main h3 {
 
 /* 設定特殊標題大小 */
 @media (max-width: 768px) {
-    main h3 {
+    main h3, h3 {
         white-space: normal;
         text-align: center;
         overflow: visible;   /* 允许文本正常显示 */
@@ -152,7 +162,7 @@ header nav ul li {
 
     display: block; /* 讓主菜單垂直堆疊 */
     position: relative;  /* 確保 header 是相對定位，這樣 home-button-top-left 才能絕對定位於 header 內 */
-    background-color: #000000; /* 深灰色背景 */
+    /* background-color: #000000; /* 深灰色背景 */
     color: #c6b8c4;
     padding: 1rem 0;
     text-align: center;
@@ -283,7 +293,7 @@ footer ul {
 /***** ----------------- 首页选项设计 ----------------- *****/
 
 /* 0. 設定主菜單 LI 的位置 */
-main nav ul li {
+header nav ul li {
     display: inline-block;
     margin: 2px 0 5px;
     
@@ -444,7 +454,7 @@ main nav ul li {
     margin: 10px auto;
 
     /* 使用 CSS 變數計算延遲，讓項目依序出現 */
-    animation-delay: calc(var(--animation-order) * 0.2s); 
+    animation-delay: calc(var(--animation-order) * 0.16s); 
 }
 
 
@@ -455,14 +465,13 @@ main nav ul li {
     transform: translateX(20px); /* 預設在右方 */
     animation: fadeInSlideLeft 0.1s ease-out forwards; /* 應用動畫 */
 
-    /* 使用 CSS 變數計算延遲，讓項目依序出現 */
-    animation-delay: calc(var(--animation-order) * 0.2s); 
+    
 }
 
 .home-page main nav ul li .submenu li {
     /* 1. 移除 LI 上可能繼承到的巨大 font-size，確保 LI 的高度正常 */
     font-size: 1rem !important; 
-    
+
     /* 2. 移除 LI 上多餘的內邊距，消除垂直方向上的巨大間距 */
     padding: 0 10px 0 !important; 
     
@@ -573,6 +582,22 @@ main nav ul li {
 
 
 
+/* Main 內容 (排除導航菜單，針對標題和段落) */
+main h1, main h2, main h3, main p, 
+.oc-text-bio p {
+    opacity: 0;
+    transform: translateX(30px);
+    animation: fadeInSlideLeft 0.6s ease-out forwards;
+    animation-delay: calc(var(--animation-order, 0) * 0.15s); 
+}
+
+/* Footer 內容 */
+footer p, footer, footer ul, footer li, .subpage-links a {
+    opacity: 0;
+    transform: translateX(30px);
+    animation: fadeInSlideLeft 0.6s ease-out forwards;
+    animation-delay: calc(var(--animation-order, 0) * 0.15s); 
+}
 
 
 
@@ -590,7 +615,15 @@ img {
     display: block; 
     margin: 0; /* 讓圖片上下有間距，並在中間顯示 */
     border: 0; /* 【新增】確保圖片超連結不會出現邊框 */
+
+    opacity: 0; /* 確保在動畫啟動前是隱藏的 */
+    transform: translateX(50px); 
+    animation: fadeInSlideLeft 0.6s ease-out forwards;
+    animation-delay: calc(var(--animation-order, 0) * 0.15s);
 }
+
+
+
 
 /* -------------------- 圖片網格佈局 (Flexbox) -------------------- */
 
@@ -603,6 +636,44 @@ img {
     justify-content: center; /* 讓圖片在容器中居中顯示 */
     /* 移除原有的 .image-grid 樣式  */
 }
+
+/* -------------------- 【新增】等高圖片排版 (Fixed Height Gallery) -------------------- */
+.gallery-height-aligned {
+    /* 確保所有項目在垂直方向上居中對齊 */
+    align-items: center; 
+    /* 移除 flex-wrap 允許它們儘量排成一排，除非寬度不足 */
+    flex-wrap: wrap;
+    gap: 15px; /* 稍微調整間距 */
+}
+
+/* 1. 覆寫圖片項目容器的 Flex 屬性 */
+.gallery-height-aligned .image-item {
+    /* 移除原本的寬度百分比限制，讓圖片容器的寬度由圖片本身決定 */
+    flex: 0 0 auto; 
+    min-width: 0; /* 覆蓋掉原有的 min-width: 25rem; 限制，以便容納小圖片 */
+}
+
+/* 2. 核心：強制圖片高度並讓寬度自適應 */
+.gallery-height-aligned .image-item img {
+    height: 600px; /* <--- 關鍵：設定所有圖片的固定高度 */
+    width: auto;   /* <--- 關鍵：讓寬度根據比例自動調整 */
+    
+    /* 可選：如果您希望圖片在固定高度的空間中不留白邊，可以使用 cover。
+       如果您希望完整顯示所有圖片內容，使用 contain。
+       這裡選擇 contain，讓所有內容都能被看到。 */
+    object-fit: contain; 
+}
+
+/* 3. 手機響應式優化 */
+@media (max-width: 768px) {
+    .gallery-height-aligned .image-item img {
+        /* 在手機上可以降低高度，例如 150px */
+        height: 300px; 
+    }
+}
+
+
+
 
 
 /* 1. 舊有頁面：【最多 3 個一排】的佈局樣式 */
