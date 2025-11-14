@@ -484,7 +484,7 @@ main nav ul li {
 
 
 .home-page main nav ul li a:hover {
-    transform: scale(1.05) !important;
+    transform: scale(1.15) !important;
     color:#0e27a2;
 }
 
