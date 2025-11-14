@@ -459,16 +459,19 @@ header nav ul li {
 
 
 
-.home-page main nav ul li .submenu {
+/* .home-page main nav ul li .submenu {
     
     opacity: 0 ;
-    transform: translateX(20px); /* 預設在右方 */
-    animation: fadeInSlideLeft 0.1s ease-out forwards; /* 應用動畫 */
+    transform: translateY(-20px); /* 預設在右方 */
+    /* animation: fadeInSlideLeft 0.2s ease-out forwards; /* 應用動畫 */
 
     
-}
+/* } */
 
 .home-page main nav ul li .submenu li {
+    opacity: 0 ;
+    transform: translateY(-20px); /* 預設在右方 */
+    animation: fadeInSlideDown 0.5s ease-out forwards; /* 應用動畫 */
     /* 1. 移除 LI 上可能繼承到的巨大 font-size，確保 LI 的高度正常 */
     font-size: 1rem !important; 
 
