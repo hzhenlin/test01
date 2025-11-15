@@ -673,7 +673,7 @@ img {
         max-width: 640px; /* 給圖片一個固定的最大寬度 */
         flex: 0 0 100%; 
         min-width: 100%;
-        
+
         height: auto;
         width: 100%;
         object-fit: contain;
@@ -713,6 +713,17 @@ img {
     text-align: center;
     box-sizing: border-box; /* 確保 padding/border 不會增加尺寸 */
 }
+
+
+.oc_main-page .image-item:hover {
+
+    min-width: 25rem; /* 設置圖片的最小寬度，防止手機上圖片太小 */
+    transform: scale(1.07);
+    transition: all 0.3s ease-in-out;
+    overflow: hidden; /* 確保內容不溢出 */
+}
+
+
 
 .image-item p {
     padding: 10px;
