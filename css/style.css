@@ -672,6 +672,7 @@ img {
     .gallery-height-aligned .image-item img {
         max-width: 640px; /* 給圖片一個固定的最大寬度 */
         flex: 0 0 100%; 
+        min-width: 100%;
         
         height: auto;
         width: 100%;
@@ -680,7 +681,7 @@ img {
         overflow: hidden;
 
         margin: 0;
-        min-width: 100%;
+        
     }
 }
 
