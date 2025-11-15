@@ -718,7 +718,7 @@ img {
 .oc_main-page .image-item:hover {
 
     min-width: 25rem; /* 設置圖片的最小寬度，防止手機上圖片太小 */
-    transform: scale(1.07);
+    transform: scale(1.12);
     transition: all 0.3s ease-in-out;
     overflow: hidden; /* 確保內容不溢出 */
 }
