@@ -46,38 +46,73 @@
         </header>
 
         <br><br><br>
-        <main><h1>歷史稿件</h1></main>
+        <main><h1 class="reveal-item">歷史稿件</h1></main>
 
-        <footer style="--animation-order: 1;"><h2>約稿可至<br>米画師：猫帮我画画 / INS：drawing_0606 / Clibo：阿蓁</h2></footer>
+        <footer style="--animation-order: 1;">
+            <h2 class="reveal-item">約稿可至<br>米画師：猫帮我画画 / INS：drawing_0606 / Clibo：阿蓁</h2>
 
-        <div class="image-gallery gallery-cols-3">
-                
-            <div class="image-item">
-                <img src="images/commission/01.jpg" alt="稿件展示 -belong to 冬天没睡饱" style="--animation-order: 2;">
+            <div class="image-gallery gallery-cols-3">
+                        
+                <div class="image-item reveal-item">
+                    <img src="images/commission/1-01.jpg" alt="稿件展示 -belong to 冬天没睡饱" style="--animation-order: 2;">
+                </div>
+                    
+                <div class="image-item reveal-item">
+                    <img src="images/commission/2-01.jpg" alt="稿件展示 -belong to 九位" style="--animation-order: 3;">
+                </div>
+
+                <div class="image-item reveal-item">
+                    <img src="images/commission/3-01.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 4;">
+                </div>
+
+                <div class="image-item reveal-item">
+                    <img src="images/commission/3-02.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 5;">
+                </div>
+
+                <div class="image-item reveal-item">
+                    <img src="images/commission/3-03.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 6;">
+                </div>
+
+                <div class="image-item reveal-item">
+                    <img src="images/commission/3-04.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 7;">
+                </div>
+
+                <div class="image-item reveal-item">
+                    <img src="images/commission/4-01.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 8;">
+                </div>
+
             </div>
-                
-            <div class="image-item">
-                <img src="images/commission/02.jpg" alt="稿件展示 -belong to 九位" style="--animation-order: 3;">
-            </div>
+        </footer>
 
-            <div class="image-item">
-                <img src="images/commission/03.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 4;">
-            </div>
+        <script>
+            // JavaScript 實作 Intersection Observer 進行滾動偵測動畫
+            document.addEventListener('DOMContentLoaded', () => {
+                // 修正錯誤：在這裡定義 observer 變數
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        // 檢查元素是否進入視窗
+                        if (entry.intersectionRatio > 0) {
+                        // 1. 進入視窗：添加 'reveal-visible' 觸發動畫
+                        entry.target.classList.add('reveal-visible');
+                        } 
+                        else {
+                        // 2. 離開視窗：移除 'reveal-visible' 重置動畫狀態
+                        // 這樣當元素再次滾動進入時，動畫會重新播放
+                        entry.target.classList.remove('reveal-visible');
+                        }
+                    });
+                }, {
+                    // 閥值 (Threshold): 當元素 10% 進入視窗時，觸發回調
+                    threshold: [0]
+                });
 
-            <div class="image-item">
-                <img src="images/commission/04.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 5;">
-            </div>
-
-            <div class="image-item">
-                <img src="images/commission/05.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 6;">
-            </div>
-
-            <div class="image-item">
-                <img src="images/commission/06.jpg" alt="稿件展示 -belong to 肆肆" style="--animation-order: 7;">
-            </div>
-
-        </div>
-
+                // 觀察所有帶有 'reveal-item' 類別的元素
+                document.querySelectorAll('.reveal-item').forEach(item => {
+                    observer.observe(item);
+                });
+            });
+        </script>
+        
     </body>
 
 </html>

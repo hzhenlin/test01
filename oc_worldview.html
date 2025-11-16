@@ -47,12 +47,42 @@
 
     <br><br><br>
     <main>
-        <h1>世界觀</h1>
-        <h2 style="--animation-order: 1;">【測試】於東瀛...</h2><br>
+        <h1 class="reveal-item">世界觀</h1>
+        <h2 class="reveal-item" style="--animation-order: 1;">【測試】於東瀛...</h2><br>
     </main>
     
     <footer>
          <p style="--animation-order: 2;">-----</p>
     </footer>
 </body>
+
+    <script>
+        // JavaScript 實作 Intersection Observer 進行滾動偵測動畫
+        document.addEventListener('DOMContentLoaded', () => {
+            // 修正錯誤：在這裡定義 observer 變數
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // 檢查元素是否進入視窗
+                    if (entry.intersectionRatio > 0) {
+                    // 1. 進入視窗：添加 'reveal-visible' 觸發動畫
+                    entry.target.classList.add('reveal-visible');
+                    } 
+                    else {
+                    // 2. 離開視窗：移除 'reveal-visible' 重置動畫狀態
+                    // 這樣當元素再次滾動進入時，動畫會重新播放
+                    entry.target.classList.remove('reveal-visible');
+                    }
+                });
+            }, {
+                // 閥值 (Threshold): 當元素 10% 進入視窗時，觸發回調
+                threshold: 0.2
+            });
+
+            // 觀察所有帶有 'reveal-item' 類別的元素
+            document.querySelectorAll('.reveal-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+
 </html>

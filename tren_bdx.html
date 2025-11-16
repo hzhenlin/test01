@@ -53,31 +53,61 @@
     <footer>
          <div class="image-gallery gallery-height-aligned">
                 
-            <div class="image-item">
+            <div class="image-item reveal-item">
                 <img src="images/tren/bdx/220512.PNG" alt="一步蓮華22年生日賀圖" style="--animation-order: 2;">
             </div>
                 
-            <div class="image-item">
+            <div class="image-item reveal-item">
                 <img src="images/tren/bdx/220526.PNG" alt="襲滅天來22年生日賀圖" style="--animation-order: 3;">
             </div>
 
-            <div class="image-item">
+            <div class="image-item reveal-item">
                 <img src="images/tren/bdx/shuangqiao-01.png" alt="手繪作業-雙橋" style="--animation-order: 4;">
             </div>
 
-            <div class="image-item">
+            <div class="image-item reveal-item">
                 <img src="images/tren/bdx/shuangqiao-0122.PNG" alt="雙橋23年活動賀圖" style="--animation-order: 5;">
             </div>
 
-            <div class="image-item">
+            <div class="image-item reveal-item">
                 <img src="images/tren/bdx/jianzong-01.png" alt="劍蹤摸魚-陰川蝴蝶君與一劍封禪" style="--animation-order: 6;">
             </div>
 
-            <div class="image-item">
+            <div class="image-item reveal-item">
                 <img src="images/tren/bdx/wudaosheng-01.png" alt="天宇摸魚-悟刀生/一生一愛一字刀" style="--animation-order: 7;">
             </div>
 
         </div>
     </footer>
 </body>
+
+<script>
+    // JavaScript 實作 Intersection Observer 進行滾動偵測動畫
+    document.addEventListener('DOMContentLoaded', () => {
+        // 修正錯誤：在這裡定義 observer 變數
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // 檢查元素是否進入視窗
+                if (entry.intersectionRatio > 0) {
+                // 1. 進入視窗：添加 'reveal-visible' 觸發動畫
+                entry.target.classList.add('reveal-visible');
+                } 
+                else {
+                // 2. 離開視窗：移除 'reveal-visible' 重置動畫狀態
+                // 這樣當元素再次滾動進入時，動畫會重新播放
+                entry.target.classList.remove('reveal-visible');
+                }
+            });
+        }, {
+            // 閥值 (Threshold): 當元素 10% 進入視窗時，觸發回調
+            threshold: [0]
+        });
+
+        // 觀察所有帶有 'reveal-item' 類別的元素
+        document.querySelectorAll('.reveal-item').forEach(item => {
+            observer.observe(item);
+        });
+    });
+</script>
+
 </html>

@@ -48,20 +48,50 @@
     <br><br><br>
     <main class="oc_main-page">
         <div class="image-gallery gallery-cols-6">
-            <a href="oc_001.html" class="image-item"> <img src="images/oc/001/oc001.png" alt="OC-001" style="--animation-order: 1;"> </a> 
-            <a href="oc_002.html" class="image-item"> <img src="images/oc/002/oc002.png" alt="OC-002" style="--animation-order: 2;"> </a>   
-            <a href="oc_003.html" class="image-item"> <img src="images/oc/003/oc003.png" alt="OC-003" style="--animation-order: 3;"> </a>
-            <a href="oc_004.html" class="image-item"> <img src="images/oc/004/oc004.png" alt="OC-004" style="--animation-order: 4;"> </a>
-            <a href="oc_005.html" class="image-item"> <img src="images/oc/005/oc005.png" alt="OC-005" style="--animation-order: 5;"> </a>
-            <a href="oc_006.html" class="image-item"> <img src="images/oc/006/oc006.png" alt="OC-006" style="--animation-order: 6;"> </a>
-            <a href="oc_007.html" class="image-item"> <img src="images/oc/007/oc007.png" alt="OC-007" style="--animation-order: 7;"> </a> 
-            <a href="oc_008.html" class="image-item"> <img src="images/oc/008/oc008.png" alt="OC-008" style="--animation-order: 8;"> </a>   
-            <a href="oc_009.html" class="image-item"> <img src="images/oc/009/oc009.png" alt="OC-009" style="--animation-order: 9;"> </a>
-            <a href="oc_010.html" class="image-item"> <img src="images/oc/010/oc010.png" alt="OC-010" style="--animation-order: 10;"> </a>
-            <a href="oc_011.html" class="image-item"> <img src="images/oc/011/oc011.png" alt="OC-011" style="--animation-order: 11;"> </a>
-            <a href="oc_012.html" class="image-item"> <img src="images/oc/012/oc012.png" alt="OC-012" style="--animation-order: 12;"> </a>
+            <a href="oc_001.html" class="image-item reveal-item"> <img src="images/oc/001/oc001.png" alt="OC-001" style="--animation-order: 1;"> </a> 
+            <a href="oc_002.html" class="image-item reveal-item"> <img src="images/oc/002/oc002.png" alt="OC-002" style="--animation-order: 2;"> </a>   
+            <a href="oc_003.html" class="image-item reveal-item"> <img src="images/oc/003/oc003.png" alt="OC-003" style="--animation-order: 3;"> </a>
+            <a href="oc_004.html" class="image-item reveal-item"> <img src="images/oc/004/oc004.png" alt="OC-004" style="--animation-order: 4;"> </a>
+            <a href="oc_005.html" class="image-item reveal-item"> <img src="images/oc/005/oc005.png" alt="OC-005" style="--animation-order: 5;"> </a>
+            <a href="oc_006.html" class="image-item reveal-item"> <img src="images/oc/006/oc006.png" alt="OC-006" style="--animation-order: 6;"> </a>
+            <a href="oc_007.html" class="image-item reveal-item"> <img src="images/oc/007/oc007.png" alt="OC-007" style="--animation-order: 7;"> </a> 
+            <a href="oc_008.html" class="image-item reveal-item"> <img src="images/oc/008/oc008.png" alt="OC-008" style="--animation-order: 8;"> </a>   
+            <a href="oc_009.html" class="image-item reveal-item"> <img src="images/oc/009/oc009.png" alt="OC-009" style="--animation-order: 9;"> </a>
+            <a href="oc_010.html" class="image-item reveal-item"> <img src="images/oc/010/oc010.png" alt="OC-010" style="--animation-order: 10;"> </a>
+            <a href="oc_011.html" class="image-item reveal-item"> <img src="images/oc/011/oc011.png" alt="OC-011" style="--animation-order: 11;"> </a>
+            <a href="oc_012.html" class="image-item reveal-item"> <img src="images/oc/012/oc012.png" alt="OC-012" style="--animation-order: 12;"> </a>
         </div>    
         
     </main>
+</body>
+
+    <script>
+        // JavaScript 實作 Intersection Observer 進行滾動偵測動畫
+        document.addEventListener('DOMContentLoaded', () => {
+            // 修正錯誤：在這裡定義 observer 變數
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // 檢查元素是否進入視窗
+                    if (entry.intersectionRatio > 0) {
+                    // 1. 進入視窗：添加 'reveal-visible' 觸發動畫
+                    entry.target.classList.add('reveal-visible');
+                    } 
+                    else {
+                    // 2. 離開視窗：移除 'reveal-visible' 重置動畫狀態
+                    // 這樣當元素再次滾動進入時，動畫會重新播放
+                    entry.target.classList.remove('reveal-visible');
+                    }
+                });
+            }, {
+                // 閥值 (Threshold): 當元素 10% 進入視窗時，觸發回調
+                threshold: [0]
+            });
+
+            // 觀察所有帶有 'reveal-item' 類別的元素
+            document.querySelectorAll('.reveal-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
 
 </html>
