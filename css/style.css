@@ -728,6 +728,7 @@ img {
     overflow: hidden; /* 確保內容不溢出 */
     text-align: center;
     box-sizing: border-box; /* 確保 padding/border 不會增加尺寸 */
+    
 }
 
 
