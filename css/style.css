@@ -96,7 +96,7 @@ body {
     animation-delay: calc(var(--animation-order, 0) * 0.2s);
 }
 
-.reveal-item.slide-from-left {
+.reveal-item .slide-from-left {
     transform: translateX(-30px);
 }
 
@@ -686,7 +686,7 @@ img {
 /* 3. 手機響應式優化 */
 @media (max-width: 900px) {
     .gallery-height-aligned .image-item img {
-        max-width: 640px; /* 給圖片一個固定的最大寬度 */
+        max-width: 900px; /* 給圖片一個固定的最大寬度 */
         flex: 0 0 100%; 
         min-width: 100%;
 

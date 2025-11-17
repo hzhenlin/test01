@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>-SEVENTEEN-</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+SC&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="current-page-title">-SEVENTEEN-<br></div>
+        <a href="index.html" class="home-button-top-left">首頁</a>
+
+         <nav class="main-nav"><h3>
+            <ul>
+                <li class="has-submenu">
+                <a href="oc_main.html">OC世界</a>
+                    <ul class="submenu">
+                        <li><a href="oc_worldview.html">世界觀</a></li>
+                        <li><a href="oc_oc.html">OC</a></li>
+                        <li><a href="oc_dev.html">開發中···</a></li> 
+                    </ul>
+                </li>
+
+                <li class="has-submenu"><a href="commission.html">稿件展示</a></li>
+
+                <li class="has-submenu">
+                    <a href="tren_main.html">同人</a>
+                        <ul class="submenu">
+                            <li><a href="tren_bdx.html">布袋戲</a></li>
+                            <li><a href="tren_es.html">ES</a></li>
+                            <li><a href="tren_ivl.html">IVL</a></li>
+                            <li><a href="tren_svt.html">SEVENTEEN</a></li>
+                            <li><a href="tren_jiajiao.html">家教</a></li>
+                        </ul>
+                </li>
+            </ul>
+        </h3></nav>
+    </header>
+    
+    <br><br>
+    <main>
+        <br><br>
+        </main>
+        
+    <footer>
+         <div class="image-gallery gallery-height-aligned">
+                
+            <div class="image-item reveal-item">
+                <img src="images/tren/svt/WONHUI-02.png" alt="佑灰02" style="--animation-order: 2;">
+            </div>
+
+            <div class="image-item reveal-item">
+                <img src="images/tren/svt/WONHUI-dance.jpg" alt="佑灰-幽灵箭-成年舞会" style="--animation-order: 3;">
+            </div>
+
+        </div>
+    </footer>
+</body>
+
+<script>
+    // JavaScript 實作 Intersection Observer 進行滾動偵測動畫
+    document.addEventListener('DOMContentLoaded', () => {
+        // 修正錯誤：在這裡定義 observer 變數
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // 檢查元素是否進入視窗
+                if (entry.intersectionRatio > 0) {
+                // 1. 進入視窗：添加 'reveal-visible' 觸發動畫
+                entry.target.classList.add('reveal-visible');
+                } 
+                else {
+                // 2. 離開視窗：移除 'reveal-visible' 重置動畫狀態
+                // 這樣當元素再次滾動進入時，動畫會重新播放
+                entry.target.classList.remove('reveal-visible');
+                }
+            });
+        }, {
+            // 閥值 (Threshold): 當元素 10% 進入視窗時，觸發回調
+            threshold: [0]
+        });
+
+        // 觀察所有帶有 'reveal-item' 類別的元素
+        document.querySelectorAll('.reveal-item').forEach(item => {
+            observer.observe(item);
+        });
+    });
+</script>
+
+</html>

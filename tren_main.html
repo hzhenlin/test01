@@ -52,13 +52,44 @@
     <footer>
         <section class="subpage-links">
             <ul><h2>
-                <li style="--animation-order: 1;"><a href="tren_bdx.html">【布袋戲】</a></li>
-                <li style="--animation-order: 2;"><a href="tren_es.html">【ES】</a></li>
-                <li style="--animation-order: 3;"><a href="tren_ivl.html">【IVL】</a></li>
-                <li style="--animation-order: 4;"><a href="tren_svt.html">【SEVENTEEN】</a></li>
-                <li style="--animation-order: 5;"><a href="tren_jiajiao.html">【家教】</a></li>
+                <div class="reveal-item"><li style="--animation-order: 1;"><a href="tren_bdx.html">【布袋戲】</a></li></div>
+                <div class="reveal-item"><li style="--animation-order: 2;"><a href="tren_es.html">【ES】</a></li></div>
+                <div class="reveal-item"><li style="--animation-order: 3;"><a href="tren_ivl.html">【IVL】</a></li></div>
+                <div class="reveal-item"><li style="--animation-order: 4;"><a href="tren_svt.html">【SEVENTEEN】</a></li></div>
+                <div class="reveal-item"><li style="--animation-order: 5;"><a href="tren_jiajiao.html">【家教】</a></li></div>
             </h2></ul>
         </section>
     </footer>
+
+
+    <script>
+        // JavaScript 實作 Intersection Observer 進行滾動偵測動畫
+        document.addEventListener('DOMContentLoaded', () => {
+            // 修正錯誤：在這裡定義 observer 變數
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // 檢查元素是否進入視窗
+                    if (entry.intersectionRatio > 0) {
+                    // 1. 進入視窗：添加 'reveal-visible' 觸發動畫
+                    entry.target.classList.add('reveal-visible');
+                    } 
+                    else {
+                    // 2. 離開視窗：移除 'reveal-visible' 重置動畫狀態
+                    // 這樣當元素再次滾動進入時，動畫會重新播放
+                    entry.target.classList.remove('reveal-visible');
+                    }
+                });
+            }, {
+                // 閥值 (Threshold): 當元素 10% 進入視窗時，觸發回調
+                threshold: [0]
+            });
+
+            // 觀察所有帶有 'reveal-item' 類別的元素
+            document.querySelectorAll('.reveal-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+
 </body>
 </html>
